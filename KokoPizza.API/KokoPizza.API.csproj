@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\BuildingBlocks\EventBus.Messages\EventBus.Messages.csproj" />
+      <ProjectReference Include="..\KokoPizza.Application\KokoPizza.Application.csproj" />
+      <ProjectReference Include="..\KokoPizza.Infrastructure\KokoPizza.Infrastructure.csproj" />
+      <ProjectReference Include="..\KokoPizza.Persistance\KokoPizza.Persistance.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MassTransit" Version="7.3.1" />
+      <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
+      <PackageReference Include="MassTransit.RabbitMQ" Version="7.3.1" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.1" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.1">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+      <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.2.3" />
+      <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.2.3" />
+      <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.2.3" />
+    </ItemGroup>
+
+</Project>

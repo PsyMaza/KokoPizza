@@ -1,0 +1,15 @@
+﻿@page "/home"
+
+<h1 class="page-title">Добро пожаловать в приложение Koko Pizza!</h1>
+<br/>
+
+<AuthorizeView>
+    <Authorized>
+        <button @onclick="Logout">Выйти</button>
+    </Authorized>
+    <NotAuthorized>
+        <button @onclick="NavigateToLogin">Вход</button>
+        <br/>
+        <button @onclick="NavigateToRegister">Регистрация</button>
+    </NotAuthorized>
+</AuthorizeView>

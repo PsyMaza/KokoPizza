@@ -1,0 +1,122 @@
+@page "/orderDetails"
+@page "/orderDetails/{Id}"
+@Message
+@if (IsNew)
+{
+    <h1 class="page-title">
+        Создание нового заказа
+    </h1>
+}
+else
+{
+    <h1 class="page-title">
+        Обновление заказа
+    </h1>
+}
+
+<EditForm Model="@OrderDetails" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator/>
+    <ValidationSummary></ValidationSummary>
+<fieldset disabled=@(!IsNew)>
+    <div class="form-group row">
+        <label for="name" class="col-sm-3">Адрес доставки: </label>
+        <InputText id="name" class="form-control col-sm-8" @bind-Value="@OrderDetails.ShipAddress" placeholder="Введите адрес доставки"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => OrderDetails.ShipAddress)"/>
+    </div>
+
+    <div class="form-group row">
+        <label for="name" class="col-sm-3">Номер телефона: </label>
+        <InputTextArea id="name" class="form-control col-sm-8" @bind-Value="@OrderDetails.PhoneNumber" placeholder="Введите номер телефона"></InputTextArea>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => OrderDetails.PhoneNumber)"/>
+    </div>
+
+    @if (!IsNew)
+    {
+        <div class="form-group row">
+            <label for="name" class="col-sm-3">Статус: </label>
+            <InputText id="name" class="form-control col-sm-8" @bind-Value="@Status"></InputText>
+        </div>
+    }
+</fieldset>
+    <div class="form-group row">
+        <table>
+            <thead>
+            <tr>
+                <th></th>
+                <th>Наименование</th>
+                <th>Цена</th>
+                <th>Количество</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            @if (IsNew)
+            {
+                @foreach (var item in OrderDetails.OrderItems)
+                {
+                    <tr>
+                        <td>
+                            <img class="product-image" src="@item.Product.PictureUri"/>
+                        </td>
+                        <td class="product-name">@item.Product.Name </td>
+                        <td class="product-price">@item.Product.Price </td>
+                        <td class="product-price">@item.Quantity </td>
+                        <td>
+                            <a @onclick="() => AddQuantity(item)" class="purchase-button btn">
+                                <i class="fas fa-caret-up"></i>
+                            </a>
+
+                            <a @onclick="() => RemoveQuantity(item)" class="purchase-button btn">
+                                <i class="fas fa-caret-down"></i>
+                            </a>
+
+                            <a @onclick="() => RemoveItem(item)" class="purchase-button btn">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                @foreach (var item in OrderDetails.OrderItems)
+                {
+                    <tr>
+                        <td>
+                            <img class="product-image" src="@item.Product.PictureUri"/>
+                        </td>
+                        <td class="product-name">@item.Product.Name </td>
+                        <td class="product-price">@item.ProductPrice </td>
+                        <td class="product-price">@item.Quantity </td>
+                    </tr>
+                }
+            }
+
+            </tbody>
+        </table>
+    </div>
+
+    @if (IsNew)
+    {
+        <button type="submit" class="submit-button">Оформить заказ</button>
+    }
+
+</EditForm>
+
+@if (OrderDetails?.StatusName?.Equals("PendingPayment") ?? false)
+{
+    <p>
+        <button @onclick="PayOrder" class="submit-button">Оплатить заказ</button>
+    </p>
+}
+
+@if (!IsNew && (!OrderDetails?.StatusName?.Equals("Delivering") ?? false) && (!OrderDetails?.StatusName?.Equals("Declined") ?? false))
+{
+    <p>
+        <button @onclick="DeclineOrder" class="delete-button">Отменить заказ</button>
+    </p>
+}
+<br/>
+<p class="back-to-catalog mt-3">
+    <img src="img/back-arrow.svg"/><a @onclick="@NavigateToOverview">Назад</a>
+</p>

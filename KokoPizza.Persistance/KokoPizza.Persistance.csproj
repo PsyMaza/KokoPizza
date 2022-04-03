@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>10</LangVersion>
+        <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace>KokoPizza.Persistance</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\KokoPizza.Application\KokoPizza.Application.csproj" />
+      <ProjectReference Include="..\KokoPizza.Domain\KokoPizza.Domain.csproj" />
+      <ProjectReference Include="..\KokoPizza.Identity\KokoPizza.Identity.csproj" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="EFCore.NamingConventions" Version="6.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="6.0.1" />
+      <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
+      <PackageReference Include="Npgsql" Version="6.0.2" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.2" />
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.15.0" />
+    </ItemGroup>
+
+</Project>

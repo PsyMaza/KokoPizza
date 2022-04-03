@@ -1,0 +1,68 @@
+@page "/editProduct"
+@page "/editProduct/{Id}"
+
+@if (string.IsNullOrEmpty(ProductDetails.Name))
+{
+    <h1 class="page-title">
+        Создание нового продукта
+    </h1>
+}
+else
+{
+    <h1 class="page-title">
+        Обновление продукта "@ProductDetails.Name"
+    </h1>
+}
+
+<EditForm Model="@ProductDetails" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator/>
+    <ValidationSummary></ValidationSummary>
+
+    <div class="form-group row">
+        <label for="name" class="col-sm-3">Наименование: </label>
+        <InputText id="name" class="form-control col-sm-8" @bind-Value="@ProductDetails.Name" placeholder="Введите название продукта"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => ProductDetails.Name)"/>
+    </div>
+
+    <div class="form-group row">
+        <label for="name" class="col-sm-3">Описание: </label>
+        <InputTextArea id="name" class="form-control col-sm-8" @bind-Value="@ProductDetails.Description" placeholder="Введите описание продукта"></InputTextArea>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => ProductDetails.Description)"/>
+    </div>
+
+    <div class="form-group row">
+        <label for="name" class="col-sm-3">Изображение: </label>
+        <InputText id="name" class="form-control col-sm-8" @bind-Value="@ProductDetails.PictureUri" placeholder="Введите ссылку на изображение продукта"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => ProductDetails.PictureUri)"/>
+    </div>
+
+    <div class="form-group row">
+        <label for="category" class="col-sm-3">Category: </label>
+        <InputSelect id="category" class="form-control col-sm-8" @bind-Value="@ProductDetails.CategoryId">
+            @foreach (var category in Categories)
+            {
+                <option value="@category.Id">@category.Name</option>
+            }
+        </InputSelect>
+    </div>
+
+    <div class="form-group row">
+        <label for="name" class="col-sm-3">Цена: </label>
+        <InputNumber id="name" class="form-control col-sm-8" @bind-Value="@ProductDetails.Price" placeholder="Введите цену продукта"></InputNumber>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => ProductDetails.Price)"/>
+    </div>
+
+    <button type="submit" class="submit-button">Сохранить</button>
+
+</EditForm>
+
+@if (ProductDetails.Id != default)
+{
+    <p>
+        <button @onclick="DeleteProduct" class="delete-button">Удалить продукт</button>
+    </p>
+}
+<br/>
+<p class="back-to-catalog mt-3">
+    <img src="img/back-arrow.svg"/><a @onclick="@NavigateToOverview">Назад</a>
+</p>

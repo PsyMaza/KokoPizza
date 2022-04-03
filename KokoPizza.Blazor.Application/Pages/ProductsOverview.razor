@@ -1,0 +1,47 @@
+@page "/productsOverview"
+<h3>Каталог</h3>
+
+<div class="m-2 d-flex justify-content-end">
+    <button @onclick="@NavigateToCart" class="mr-1">Перейти в корзину</button>
+</div>
+
+@if (Products == null)
+{
+    <p>
+        <em>Загрузка ...</em>
+    </p>
+}
+else
+{
+    <table>
+        <thead>
+        <tr>
+            <th></th>
+            <th>Наименование</th>
+            <th>Цена</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var product in Products)
+        {
+            <tr>
+                <td>
+                    <img class="product-image" src="@product.PictureUri"/>
+                </td>
+                <td class="product-name">@product.Name </td>
+                <td class="product-price">@product.Price </td>
+                <td>
+                    <a @onclick="() => AddToCart(product.Id)" class="purchase-button btn">
+                        <i class="fas fa-cart-plus"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <Pager PageIndex="@_paginatedList.PageIndex" TotalPages=@_paginatedList.PageSize OnClick="PageIndexChanged"
+           HasNextPage=@_paginatedList.HasNextPage HasPreviousPage=@_paginatedList.HasPreviousPage>
+    </Pager>
+}

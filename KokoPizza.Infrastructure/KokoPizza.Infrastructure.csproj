@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>KokoPizza.Infrastructure.Infrastructure</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="CsvHelper" Version="27.2.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\KokoPizza.Application\KokoPizza.Application.csproj" />
+      <ProjectReference Include="..\KokoPizza.Domain\KokoPizza.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

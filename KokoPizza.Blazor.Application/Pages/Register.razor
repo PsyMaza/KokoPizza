@@ -1,0 +1,41 @@
+﻿@page "/register"
+
+
+<div class="mt-5 row">
+    <div class="card col-12 col-lg-6 mr-auto ml-auto p-3">
+        <h3 class="card-title">Регистрация</h3>
+        <div class="card-body">
+            <EditForm Model="@RegisterViewModel" OnValidSubmit="HandleValidSubmit">
+                <div class="input-group col mt-2">
+                    <label class="col-12 col-md-4 p-0" for="firstName">Имя:</label>
+                    <InputText id="firstName" class="form-control col-12 col-md-8 login-field" @bind-Value="RegisterViewModel.FirstName"></InputText>
+                </div>
+                <div class="input-group col mt-2">
+                    <label class="col-12 col-md-4 p-0" for="lastName">Фамилия:</label>
+                    <InputText type="lastName" class="form-control col-12 col-md-8 login-field" @bind-Value="@RegisterViewModel.LastName"></InputText>
+                </div>
+                <div class="input-group col mt-2">
+                    <label class="col-12 col-md-4 p-0" for="email">Электронная почта:</label>
+                    <InputText id="email" class="form-control col-12 col-md-8 login-field" @bind-Value="RegisterViewModel.Email"></InputText>
+                </div>
+                <div class="input-group col mt-2">
+                    <label class="col-12 col-md-4 p-0" for="userName">Имя пользователя:</label>
+                    <InputText id="userName" class="form-control col-12 col-md-8 login-field" @bind-Value="RegisterViewModel.UserName"></InputText>
+                </div>
+                <div class="input-group col mt-2">
+                    <label class="col-12 col-md-4 p-0" for="password">Пароль:</label>
+                    <InputText id="password" type="password" class="form-control col-12 col-md-8 login-field" @bind-Value="RegisterViewModel.Password"></InputText>
+                </div>
+                <div class="input-group col mt-2">
+                    <div class="offset-md-4">
+                        <button class="m-2 p-2">Зарегистрироваться</button>
+                    </div>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+<p class="back-to-catalog mt-3">
+    <img src="img/back-arrow.svg"/><a @onclick="@NavigateToHome">Назад</a>
+</p>

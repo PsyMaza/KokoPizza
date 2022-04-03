@@ -1,0 +1,57 @@
+@page "/cartOverview"
+<h3>Корзина</h3>
+
+<div class="m-2 d-flex justify-content-end">
+    <button @onclick="@NavigateToOrder" class="mr-1">Оформить заказ</button>
+</div>
+
+@if (UserCart == null)
+{
+    <p>
+        <em>Загрузка ...</em>
+    </p>
+}
+else
+{
+    <table>
+        <thead>
+        <tr>
+            <th></th>
+            <th>Наименование</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in UserCart.Items)
+        {
+            <tr>
+                <td>
+                    <img class="product-image" src="@item.Product.PictureUri"/>
+                </td>
+                <td class="product-name">@item.Product.Name </td>
+                <td class="product-price">@item.Product.Price </td>
+                <td class="product-price">@item.Quantity </td>
+                <td>
+                    <a @onclick="() => AddQuantity(item)" class="purchase-button btn">
+                        <i class="fas fa-caret-up"></i>
+                    </a>
+
+                    <a @onclick="() => RemoveQuantity(item)" class="purchase-button btn">
+                        <i class="fas fa-caret-down"></i>
+                    </a>
+
+                    <a @onclick="() => RemoveCartItem(item)" class="purchase-button btn">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <p class="back-to-catalog mt-3">
+        <img src="img/back-arrow.svg"/><a @onclick="@NavigateToProducts">Назад</a>
+    </p>
+}

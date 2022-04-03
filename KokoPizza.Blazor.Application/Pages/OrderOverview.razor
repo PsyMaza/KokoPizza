@@ -1,0 +1,37 @@
+@page "/ordersOverview"
+<h3>Заказы</h3>
+
+@if (Orders == null)
+{
+    <p>
+        <em>Загрузка ...</em>
+    </p>
+}
+else
+{
+    <table>
+        <thead>
+        <tr>
+            <th>Статус</th>
+            <th>Адрес доставки</th>
+            <th>Номер телефона</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var order in Orders)
+        {
+            <tr>
+                <td class="product-name">@order.StatusName </td>
+                <td class="product-name">@order.ShipAddress </td>
+                <td class="product-price">@order.PhoneNumber </td>
+                <td>
+                    <a href="@($"orderDetails/{order.Id.ToString()}")" class="purchase-button btn">
+                        <i class="fas fa-info"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
